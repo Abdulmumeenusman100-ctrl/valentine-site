@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>For You ❤️</title>
+    <title>Be My Val ❤️</title>
     <style>
         body {
             margin: 0;
@@ -10,19 +10,150 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: pink;
+            background: linear-gradient(135deg, #ffb3c6, #ffe5ec);
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            width: 340px;
+            height: 280px;
+            z-index: 2;
+        }
+
         h1 {
             color: #c9184a;
-            font-size: 40px;
-            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .heart {
+            display: inline-block;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        #yes {
+            background: #e63946;
+            color: white;
+            left: 60px;
+            bottom: 35px;
+        }
+
+        #no {
+            background: #adb5bd;
+            color: black;
+            right: 60px;
+            bottom: 35px;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-hearts span {
+            position: absolute;
+            bottom: -20px;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: rise 6s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Hi Precious, will you be my Val? 💖</h1>
+    <!-- Floating hearts background -->
+    <div class="floating-hearts">
+        <span style="left:10%; animation-delay:0s;">❤️</span>
+        <span style="left:30%; animation-delay:2s;">💖</span>
+        <span style="left:50%; animation-delay:4s;">💕</span>
+        <span style="left:70%; animation-delay:1s;">💘</span>
+        <span style="left:90%; animation-delay:3s;">❤️</span>
+    </div>
+
+    <div class="box">
+        <h1>
+            Hi Precious 💖<br>
+            Will you be my Val <span class="heart">❤️</span>?
+        </h1>
+
+        <button id="yes" onclick="yesClicked()">Yes 💘</button>
+        <button id="no" onmouseover="moveNo()">No 😅</button>
+    </div>
+
+    <script>
+        function moveNo() {
+            const noBtn = document.getElementById("no");
+            const box = document.querySelector(".box");
+
+            const maxX = box.clientWidth - noBtn.offsetWidth;
+            const maxY = box.clientHeight - noBtn.offsetHeight;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+        function yesClicked() {
+            document.body.innerHTML = `
+                <div style="
+                    height:100vh;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    background:linear-gradient(135deg, #ffb3c6, #ffe5ec);
+                    font-family:Arial;
+                ">
+                    <h1 style="color:#c9184a;">
+                        Yay! 💕 You just made my day ❤️
+                    </h1>
+                </div>
+            `;
+        }
+    </script>
 
 </body>
 </html>
